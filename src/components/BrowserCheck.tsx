@@ -18,9 +18,9 @@ const BrowserCheck: React.FC<BrowserCheckProps> = ({ children }) => {
   useEffect(() => {
     const checkSupport = () => {
       const support: BrowserSupport = {
-        audioContext: !!(window.AudioContext || (window as any).webkitAudioContext),
+        audioContext: !!(window.AudioContext || (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext),
         getUserMedia: !!(navigator.mediaDevices?.getUserMedia),
-        webAudio: !!(window.AudioContext || (window as any).webkitAudioContext),
+        webAudio: !!(window.AudioContext || (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext),
         https: location.protocol === 'https:' || location.hostname === 'localhost'
       };
 

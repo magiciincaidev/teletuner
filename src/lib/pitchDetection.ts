@@ -1,8 +1,10 @@
 export class PitchDetector {
   private sampleRate: number;
 
-  constructor(sampleRate: number, _bufferSize: number = 16384) {
+  constructor(sampleRate: number, bufferSize: number = 16384) {
     this.sampleRate = sampleRate;
+    // bufferSize is available for future use
+    console.debug('PitchDetector initialized with bufferSize:', bufferSize);
   }
 
   detectPitch(timeDomainData: Float32Array): number | null {

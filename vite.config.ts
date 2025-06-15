@@ -15,8 +15,8 @@ export default defineConfig({
         description: '高精度音声解析エンジン搭載のギターチューナー',
         start_url: '/',
         display: 'standalone',
-        background_color: '#111827',
-        theme_color: '#10B981',
+        background_color: '#171f14',
+        theme_color: '#8cd279',
         icons: [
           {
             src: 'guitar.png',

@@ -14,7 +14,7 @@ export class AudioProcessor {
         throw new Error('getUserMedia is not supported in this browser');
       }
 
-      this.audioContext = new (window.AudioContext || (window as any).webkitAudioContext)({
+      this.audioContext = new (window.AudioContext || (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext)({
         sampleRate: AUDIO_CONFIG.sampleRate
       });
 

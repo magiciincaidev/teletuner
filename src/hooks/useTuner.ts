@@ -52,7 +52,7 @@ export const useTuner = () => {
       }
 
       setState('listening');
-      startAnalysis();
+      setTimeout(startAnalysis, 0);
     } catch (error) {
       console.error('Failed to initialize audio:', error);
       const errorMessage = error instanceof Error ? error.message : 'マイクのアクセスが許可されていません';

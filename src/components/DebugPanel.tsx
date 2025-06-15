@@ -55,7 +55,7 @@ const DebugPanel = () => {
         </div>
         
         <div>
-          <strong>AudioContext:</strong> {!!(window.AudioContext || (window as any).webkitAudioContext) ? 'OK' : 'NG'}<br/>
+          <strong>AudioContext:</strong> {(window.AudioContext || (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext) ? 'OK' : 'NG'}<br/>
           <strong>getUserMedia:</strong> {!!navigator.mediaDevices?.getUserMedia ? 'OK' : 'NG'}
         </div>
       </div>
