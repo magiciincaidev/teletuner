@@ -3,6 +3,8 @@ import { useTunerStore } from '../stores/tunerStore';
 import { useTuner } from '../hooks/useTuner';
 
 const ModernTunerApp = () => {
+  // Debug: Confirm component is loading
+  console.log('ModernTunerApp component loaded');
   const {
     state,
     currentMode,
@@ -54,7 +56,15 @@ const ModernTunerApp = () => {
   };
 
   return (
-    <div className="relative flex size-full min-h-screen flex-col bg-[#171f14] justify-between" style={{ fontFamily: '"Space Grotesk", "Noto Sans", sans-serif' }}>
+    <div 
+      className="relative flex size-full min-h-screen flex-col justify-between" 
+      style={{ 
+        fontFamily: '"Space Grotesk", "Noto Sans", sans-serif',
+        backgroundColor: '#171f14',
+        color: '#ffffff',
+        minHeight: '100vh'
+      }}
+    >
       {/* Header */}
       <div>
         <div className="flex items-center bg-[#171f14] p-4 pb-2 justify-between">
