@@ -55,7 +55,8 @@ export const useTuner = () => {
       startAnalysis();
     } catch (error) {
       console.error('Failed to initialize audio:', error);
-      setError('マイクのアクセスが許可されていません');
+      const errorMessage = error instanceof Error ? error.message : 'マイクのアクセスが許可されていません';
+      setError(errorMessage);
       setPermissionGranted(false);
     }
   }, [currentMode, setState, setError, setPermissionGranted]);

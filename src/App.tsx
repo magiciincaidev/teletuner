@@ -1,4 +1,6 @@
 import { Toaster } from 'sonner';
+import BrowserCheck from './components/BrowserCheck';
+import DebugPanel from './components/DebugPanel';
 import Headstock from './components/Headstock';
 import TunerMeter from './components/TunerMeter';
 import { useTuner } from './hooks/useTuner';
@@ -19,7 +21,11 @@ function App() {
   const { initializeAudio, stopAnalysis } = useTuner();
 
   const handleStart = async () => {
-    await initializeAudio();
+    try {
+      await initializeAudio();
+    } catch (error) {
+      console.error('Audio initialization failed:', error);
+    }
   };
 
   const handleStop = () => {
@@ -40,8 +46,9 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex flex-col">
-      <Toaster position="top-center" />
+    <BrowserCheck>
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex flex-col">
+        <Toaster position="top-center" />
       
       {/* Header */}
       <header className="text-center py-6">
@@ -154,7 +161,10 @@ function App() {
       <footer className="text-center py-4 text-gray-500 text-xs">
         TeleTuner v2.0 - 高精度音声解析エンジン搭載
       </footer>
-    </div>
+      </div>
+      
+      <DebugPanel />
+    </BrowserCheck>
   );
 }
 

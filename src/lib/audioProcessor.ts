@@ -9,7 +9,12 @@ export class AudioProcessor {
 
   async initialize(): Promise<void> {
     try {
-      this.audioContext = new AudioContext({
+      // Check if getUserMedia is available
+      if (!navigator.mediaDevices?.getUserMedia) {
+        throw new Error('getUserMedia is not supported in this browser');
+      }
+
+      this.audioContext = new (window.AudioContext || (window as any).webkitAudioContext)({
         sampleRate: AUDIO_CONFIG.sampleRate
       });
 
@@ -27,7 +32,8 @@ export class AudioProcessor {
           noiseSuppression: false,
           autoGainControl: false,
           sampleRate: AUDIO_CONFIG.sampleRate
-        }
+        },
+        video: false
       });
 
       this.microphone = this.audioContext.createMediaStreamSource(stream);
@@ -36,7 +42,22 @@ export class AudioProcessor {
       this.isInitialized = true;
     } catch (error) {
       console.error('Failed to initialize audio processor:', error);
-      throw error;
+      
+      let errorMessage = 'オーディオの初期化に失敗しました';
+      
+      if (error instanceof Error) {
+        if (error.name === 'NotAllowedError') {
+          errorMessage = 'マイクのアクセスが拒否されました。ブラウザの設定でマイクを許可してください。';
+        } else if (error.name === 'NotFoundError') {
+          errorMessage = 'マイクが見つかりません。マイクが接続されているか確認してください。';
+        } else if (error.name === 'NotSupportedError') {
+          errorMessage = 'このブラウザではマイクがサポートされていません。';
+        } else if (error.message.includes('getUserMedia')) {
+          errorMessage = 'マイクアクセスがサポートされていません。HTTPS接続が必要です。';
+        }
+      }
+      
+      throw new Error(errorMessage);
     }
   }
 
