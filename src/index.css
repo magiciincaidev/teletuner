@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply h-full;
+  }
+  
+  body {
+    @apply h-full bg-gray-900 text-white font-guitar;
+    margin: 0;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+}
+
+@layer components {
+  .tuner-meter {
+    @apply relative w-full h-32 bg-gray-800 rounded-lg border border-gray-700;
+  }
+  
+  .string-peg {
+    @apply w-8 h-8 bg-tuner-peg rounded-full border-2 border-tuner-woodDark 
+           cursor-pointer transition-all duration-200 hover:scale-110;
+  }
+  
+  .string-peg.active {
+    @apply shadow-lg shadow-tuner-peg/50 scale-110;
+  }
+  
+  .frequency-display {
+    @apply text-2xl font-mono font-bold text-center p-4;
+  }
+}
+
+@layer utilities {
+  .wood-texture {
+    background: linear-gradient(45deg, #8B4513, #CD853F, #8B4513);
+    background-size: 20px 20px;
+  }
+}
